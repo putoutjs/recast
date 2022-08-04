@@ -44,7 +44,7 @@
   "dependencies": {
     "ast-types": "0.15.2",
     "esprima": "~4.0.0",
-    "source-map": "~0.6.1",
+    "source-map": "~0.7.4",
     "tslib": "^2.0.1"
   },
   "devDependencies": {
