@@ -215,7 +215,7 @@ describe("Babel", function () {
     const code = [
       `import foo from "foo";`,
     ].join(eol);
-  
+
     const ast = recast.parse(code, parseOptions);
     ast.program.body[0].assertions = [{
         type: 'ImportAttribute',
@@ -228,17 +228,17 @@ describe("Babel", function () {
             value: 'json',
         }
     }];
-    
+
     const expected = `import foo from "foo" assert { type: "json" };`;
 
     assert.strictEqual(recast.print(ast).code, expected);
   });
-  
+
   it("ImportAttribute: a couple", function () {
     const code = [
       `import foo from "foo";`,
     ].join(eol);
-  
+
     const ast = recast.parse(code, parseOptions);
     ast.program.body[0].assertions = [{
         type: 'ImportAttribute',
@@ -261,17 +261,17 @@ describe("Babel", function () {
             value: 'bar',
         }
     }];
-    
+
     const expected = `import foo from "foo" assert { type: "json", foo: "bar" };`;
 
     assert.strictEqual(recast.print(ast).code, expected);
   });
-  
+
   it("ImportAttribute: parse", function () {
     const code = [
       `import foo from "foo" assert { type: "json" };`,
     ].join(eol);
-  
+
     const ast = recast.parse(code, parseOptions);
 
     assert.strictEqual(recast.print(ast).code, code);
@@ -523,11 +523,11 @@ describe("Babel", function () {
       ["class A {", "  declare public readonly x;", "}"].join(eol),
     );
   });
-  
+
   it("should keep braces in !(a && b)", function () {
     const code = '(options || !options.bidirectional) ? false : true;';
     const ast = recast.parse(code, parseOptions);
-    
+
     ast.program.body[0].expression = b.unaryExpression('!', ast.program.body[0].expression.test);
 
     assert.strictEqual(
@@ -538,7 +538,7 @@ describe("Babel", function () {
   it("should use single quotes", function () {
     const code = 'const a = 1;';
     const ast = recast.parse(code, parseOptions);
-    
+
     ast.program.body.unshift(b.expressionStatement(b.stringLiteral('use strict')));
 
     assert.strictEqual(
@@ -561,6 +561,23 @@ describe("Babel", function () {
     assert.strictEqual(
       recast.print(ast).code,
       'export * as fs from "xx";'
+    );
+  });
+
+  it("should not add curly braces in ExportNamedDeclaration used with ExportNamespaceSpecifier: couple specifiers", function () {
+    const code = 'export * as fs2, {x, y} from "fs/promises"';
+    const ast = recast.parse(code, parseOptions);
+
+    traverse(ast, {
+      ExportNamedDeclaration(path: NodePath) {
+        path.replaceWith(template.ast('export * as fs, {x, y} from "xx"') as Node);
+        path.stop();
+      }
+    })
+
+    assert.strictEqual(
+      recast.print(ast).code,
+      'export * as fs, { x, y } from "xx";'
     );
   });
 });
