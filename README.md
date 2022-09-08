@@ -7,6 +7,7 @@
 
 # Fork contains unmerged fixes
 
+- ✅ Added support of `ExportNamedSpecifiers` (https://github.com/benjamn/recast/pull/1185)
 - ✅ Added import assertions support (https://github.com/benjamn/recast/pull/804)
 - ✅ Fixed broken parenthesis when argument of UnaryExpression is LogicalExpression `!(a && b)` (https://github.com/benjamn/recast/pull/923)
 - ✅ Fixed broken quotes (https://github.com/benjamn/recast/pull/1024 )
