@@ -458,6 +458,29 @@ describe("Babel", function () {
     );
   });
 
+  it("should keep braces in !(a && b)", function () {
+    const code = '(options || !options.bidirectional) ? false : true;';
+    const ast = recast.parse(code, parseOptions);
+
+    ast.program.body[0].expression = b.unaryExpression('!', ast.program.body[0].expression.test);
+
+    assert.strictEqual(
+      recast.print(ast).code,
+      '!((options || !options.bidirectional));',
+    );
+  });
+  it("should use single quotes", function () {
+    const code = 'const a = 1;';
+    const ast = recast.parse(code, parseOptions);
+
+    ast.program.body.unshift(b.expressionStatement(b.stringLiteral('use strict')));
+
+    assert.strictEqual(
+      recast.print(ast, {quote: 'single'}).code,
+      `'use strict';\nconst a = 1;`,
+      );
+   });
+
   it("should not add curly braces in ExportNamedDeclaration used with ExportNamespaceSpecifier", function () {
     const code = 'export * as fs2 from "fs/promises"';
     const ast = recast.parse(code, parseOptions);
@@ -472,6 +495,23 @@ describe("Babel", function () {
     assert.strictEqual(
       recast.print(ast).code,
       'export * as fs from "xx";'
+    );
+  });
+
+  it("should not add curly braces in ExportNamedDeclaration used with ExportNamespaceSpecifier: couple specifiers", function () {
+    const code = 'export * as fs2, {x, y} from "fs/promises"';
+    const ast = recast.parse(code, parseOptions);
+
+    traverse(ast, {
+      ExportNamedDeclaration(path: NodePath) {
+        path.replaceWith(template.ast('export * as fs, {x, y} from "xx"') as Node);
+        path.stop();
+      }
+    })
+
+    assert.strictEqual(
+      recast.print(ast).code,
+      'export * as fs, { x, y } from "xx";'
     );
   });
 });
