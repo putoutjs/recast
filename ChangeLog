@@ -1,3 +1,8 @@
+2022.09.27, v1.9.0
+
+feature:
+- Unify DeclareClass with ClassDeclaration
+
 2022.09.08, v1.8.1
 
 feature:
