@@ -70,23 +70,26 @@ it("should not remove trailing whitespaces", function () {
         'function App() {\n' +
         '  const name = "world";\n' +
         '\n' +
-        '  return (\n' + 
-        '    <div className="app">hello {name}\n' +
+        '  return (\n' +
+        '    <div className="app">\n' +
+        '        hello {name}\n' +
         '    </div>\n' +
         '  );\n' +
         '}'
     ;
     
     const ast = parse(source);
+    ast.program.body[0].body.body[1].argument.openingElement.attributes[0].name.name = 'abc';
+    
     const code = printer.printGenerically(ast).code;
-      
+    
     assert.equal(
       code,
         'function App() {\n' +
         '  const name = "world";\n' +
         '\n' +
         '  return (\n' + 
-        '    <div className="app">hello {name}\n' +
+        '    <div abc="app">hello {name}\n' +
         '    </div>\n' +
         '  );\n' +
         '}'
