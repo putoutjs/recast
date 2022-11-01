@@ -1,3 +1,8 @@
+2022.11.01, v1.10.0
+
+fix:
+- printer: JSXText: remove trailing whitespaces (benjamn/recast#211)
+
 2022.09.27, v1.9.0
 
 feature:
