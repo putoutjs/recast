@@ -1314,9 +1314,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
             namedTypes.Literal.check(child) &&
             typeof child.value === "string"
           ) {
-            if (/\S/.test(child.value)) {
-              return child.value.replace(/^\s+|\s+$/g, "");
-            } else if (/\n/.test(child.value)) {
+            if (/\n/.test(child.value)) {
               return "\n";
             }
           }
