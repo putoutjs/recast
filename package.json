@@ -24,7 +24,8 @@
   "scripts": {
     "mocha": "test/run.sh",
     "debug": "test/run.sh --inspect-brk",
-    "test": "npm run lint && npm run build && npm run mocha",
+    "lint:test": "run lint && npm run build && npm run mocha",
+    "test": "tsc --build && npm run mocha",
     "build": "npm run clean && tsc",
     "lint": "eslint --ext .ts .",
     "format": "prettier --write .",
