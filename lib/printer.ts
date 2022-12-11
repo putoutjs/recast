@@ -2266,6 +2266,12 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       return concat(parts);
     }
 
+    case "TSTypeCastExpression":
+      return concat([
+        path.call(print, "expression"),
+        path.call(print, "typeAnnotation"),
+      ]);
+
     case "TSNonNullExpression":
       return concat([path.call(print, "expression"), "!"]);
 
