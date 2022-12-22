@@ -4,7 +4,6 @@ import * as recast from "../main";
 const n = recast.types.namedTypes;
 const b = recast.types.builders;
 
-import { EOL as eol } from "os";
 import traverse, {NodePath, Node} from '@babel/traverse';
 import template from '@babel/template';
 
