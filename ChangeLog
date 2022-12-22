@@ -1,3 +1,8 @@
+2022.12.22, v1.11.0
+
+fix:
+- printer: jsx: trim only from beginning
+
 2022.11.01, v1.10.1
 
 fix:
