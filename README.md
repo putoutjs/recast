@@ -8,7 +8,7 @@
 # Fork contains unmerged fixes
 
 - ✅ Added support of `ExportNamedSpecifiers` (https://github.com/benjamn/recast/pull/1185)
-- ✅ Fixed removing whiltespades from `JSXText` (https://github.com/benjamn/recast/pull/1223)
+- ✅ Fixed removing whiltespaces from `JSXText` (https://github.com/benjamn/recast/pull/1223)
 - ✅ Fixed comments moved in Call Expression (https://github.com/benjamn/recast/pull/1273)
 
 ## Installation
