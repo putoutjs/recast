@@ -180,7 +180,7 @@ export function getReprinter(path: any) {
        origParentNode?.type === 'CallExpression' ) {
       if (path.getName () !== 'callee') {
           // console.log (`- got argument`);
-          let     origIndex   = origParentNode.arguments.findIndex (n => n === orig);
+          let     origIndex   = origParentNode.arguments.findIndex ((n: any) => n === orig);
           console.log (`- origIndex: ${origIndex}`);
 
           if (origIndex !== -1) {
