@@ -172,6 +172,68 @@ export function getReprinter(path: any) {
   const lines = origLoc && origLoc.lines;
   const reprints: any[] = [];
 
+  let     parentNode      = path.getParentNode ();
+  let     origParentNode  = parentNode?.original;
+
+  if ( (node as any).type === 'Identifier' && orig &&
+       parentNode?.type === 'CallExpression' &&
+       origParentNode?.type === 'CallExpression' ) {
+      if (path.getName () !== 'callee') {
+          // console.log (`- got argument`);
+          let     origIndex   = origParentNode.arguments.findIndex (n => n === orig);
+          console.log (`- origIndex: ${origIndex}`);
+
+          if (origIndex !== -1) {
+              // Let's process starting point
+              let     origStart       = origLoc.start;
+              let     origEnd         = origLoc.end;
+              let     startColumn     = origStart.column;
+              let     endColumn       = origEnd.column;
+
+              if ((node as any).comments) {
+                  let     commentsEnd = (node as any).comments.at (-1).loc.end;
+
+                  // only process same-line situations
+                  // Also, assuming leading comments
+                  if ( origStart.line === commentsEnd.line &&
+                       commentsEnd.column <= origStart.column) {
+                          console.log (`- commentsEnd: ${commentsEnd.column}, origStart: ${origStart.column}`);
+                          startColumn     = commentsEnd.column;
+                          // Lets take a ride until non-whitespace is encountered
+                          while (origLoc.lines.charAt ({line: origStart.line, column: startColumn}) === ' ') {
+                              startColumn ++;
+                          }
+                  }
+              }
+              // else if (origIndex === 0) {
+              //     console.log (`- todo first argument`);
+              //     // It is argument 0, lets strip off leading comments
+              // }
+
+              // Let's process the ending point
+              if (origIndex !== origParentNode.arguments.length-1) {
+                  // Not last element
+                  console.log (`- not last argument`);
+                  let     nextArgNode     = origParentNode.arguments[origIndex+1];
+                  let     nextArgStart    = nextArgNode.loc.start;
+
+                  // only process same-line situations
+                  if (origEnd.line === nextArgStart.line) {
+                          endColumn   = nextArgStart.column-1;
+                          while (origLoc.lines.charAt ({line: origEnd.line, column: endColumn}) === ' ') {
+                              endColumn --;
+                          }
+                  }
+              }
+
+              origLoc.start.column    = startColumn;
+              origLoc.end.column      = endColumn;
+          }
+      }
+  }
+
+
+
   if (!lines || !findReprints(path, reprints)) return;
 
   return function (print: any) {
