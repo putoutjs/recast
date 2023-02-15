@@ -181,7 +181,6 @@ export function getReprinter(path: any) {
       if (path.getName () !== 'callee') {
           // console.log (`- got argument`);
           let     origIndex   = origParentNode.arguments.findIndex ((n: any) => n === orig);
-          console.log (`- origIndex: ${origIndex}`);
 
           if (origIndex !== -1) {
               // Let's process starting point
@@ -197,7 +196,6 @@ export function getReprinter(path: any) {
                   // Also, assuming leading comments
                   if ( origStart.line === commentsEnd.line &&
                        commentsEnd.column <= origStart.column) {
-                          console.log (`- commentsEnd: ${commentsEnd.column}, origStart: ${origStart.column}`);
                           startColumn     = commentsEnd.column;
                           // Lets take a ride until non-whitespace is encountered
                           while (origLoc.lines.charAt ({line: origStart.line, column: startColumn}) === ' ') {
