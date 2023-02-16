@@ -212,7 +212,7 @@ export function getReprinter(path: any) {
               // Let's process the ending point
               if (origIndex !== origParentNode.arguments.length-1) {
                   // Not last element
-                  console.log (`- not last argument`);
+                  // console.log (`- not last argument`);
                   let     nextArgNode     = origParentNode.arguments[origIndex+1];
                   let     nextArgStart    = nextArgNode.loc.start;
 
