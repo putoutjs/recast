@@ -190,12 +190,13 @@ export function getReprinter(path: any) {
               let     endColumn       = origEnd.column;
 
               if ((node as any).comments) {
-                  let     commentsEnd = (node as any).comments.at (-1).loc.end;
+                  let     lastComment     = (node as any).comments.at (-1);
+                  let     commentsEnd     = lastComment.loc.end;
 
                   // only process same-line situations
                   // Also, assuming leading comments
                   if ( origStart.line === commentsEnd.line &&
-                       commentsEnd.column <= origStart.column) {
+                       lastComment.leading ) {
                           startColumn     = commentsEnd.column;
                           // Lets take a ride until non-whitespace is encountered
                           while (origLoc.lines.charAt ({line: origStart.line, column: startColumn}) === ' ') {
