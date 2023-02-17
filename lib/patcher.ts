@@ -190,7 +190,7 @@ export function getReprinter(path: any) {
               let     endColumn       = origEnd.column;
 
               if ((node as any).comments) {
-                  let     lastComment     = (node as any).comments.at (-1);
+                  let     lastComment     = (node as any).comments[(node as any).comments.length-1];
                   let     commentsEnd     = lastComment.loc.end;
 
                   // only process same-line situations
