@@ -63,7 +63,7 @@
     "eslint": "^8.5.0",
     "esprima-fb": "15001.1001.0-dev-harmony-fb",
     "flow-parser": "^0.200.0",
-    "glob": "8.1.0",
+    "glob": "9.1.0",
     "lint-staged": "^13.0.3",
     "mocha": "^10.0.0",
     "prettier": "^2.6.2",
