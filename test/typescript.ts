@@ -355,6 +355,12 @@ const nodeMajorVersion = parseInt(process.versions.node, 10);
       "type Blue = Color.b;",
       "type Alpha = Color.a;",
     ]);
+
+    check([
+      "type alias = boolean;",
+      "const value = 0;",
+      "export { type alias, value };"
+    ])
   });
 
   it("parens", function () {
