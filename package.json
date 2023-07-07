@@ -57,7 +57,7 @@
     "@types/glob": "8.1.0",
     "@types/node": "^20.0.0",
     "@typescript-eslint/parser": "^5.8.0",
-    "@babel/core": "7.22.6",
+    "@babel/core": "7.22.8",
     "@babel/parser": "7.22.6",
     "@babel/preset-env": "7.22.6",
     "@types/mocha": "10.0.1",
