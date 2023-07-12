@@ -1,3 +1,8 @@
+2023.07.12, v1.12.2
+
+fix:
+- 9368a83 print ExportSpecifier.exportKind
+
 2023.02.12, v1.12.1
 
 fix:
