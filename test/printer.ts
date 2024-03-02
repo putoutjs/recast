@@ -1193,11 +1193,7 @@ describe("printer", function () {
   });
 
   it("prints class property initializers with type annotations correctly", function () {
-    const code = [
-      "class A {",
-      "  foo = (a: b): void => {};",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  foo = (a: b): void => {};", "}"].join(eol);
 
     const arg = b.identifier("a");
     arg.typeAnnotation = b.typeAnnotation(
@@ -1223,11 +1219,7 @@ describe("printer", function () {
   });
 
   it("prints ClassProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  foo: Type = Bar;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  foo: Type = Bar;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1253,11 +1245,7 @@ describe("printer", function () {
   });
 
   it("prints 'definite' ClassProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  foo!: string;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  foo!: string;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1284,11 +1272,7 @@ describe("printer", function () {
   });
 
   it("prints static ClassProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  static foo = Bar;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  static foo = Bar;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1308,11 +1292,7 @@ describe("printer", function () {
   });
 
   it("prints ClassAccessorProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  accessor foo: Type = Bar;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  accessor foo: Type = Bar;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1323,8 +1303,8 @@ describe("printer", function () {
             value: b.identifier("Bar"),
             typeAnnotation: b.tsTypeAnnotation(
               b.tsTypeReference(b.identifier("Type")),
-            )
-          })
+            ),
+          }),
         ]),
       ),
     ]);
@@ -1338,11 +1318,7 @@ describe("printer", function () {
   });
 
   it("prints 'definite' ClassAccessorProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  accessor foo!: string;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  accessor foo!: string;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1366,11 +1342,7 @@ describe("printer", function () {
   });
 
   it("prints static ClassAccessorProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  static accessor foo = Bar;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  static accessor foo = Bar;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1394,11 +1366,7 @@ describe("printer", function () {
   });
 
   it("prints abstract ClassAccessorProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  abstract accessor foo = Bar;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  abstract accessor foo = Bar;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
@@ -1422,11 +1390,7 @@ describe("printer", function () {
   });
 
   it("prints override ClassAccessorProperty correctly", function () {
-    const code = [
-      "class A {",
-      "  override accessor foo = Bar;",
-      "}",
-    ].join(eol);
+    const code = ["class A {", "  override accessor foo = Bar;", "}"].join(eol);
 
     const ast = b.program([
       b.classDeclaration(
