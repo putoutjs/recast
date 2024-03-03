@@ -3009,13 +3009,19 @@ function printExportDeclaration(path: any, options: any, print: any) {
       parts.push("*");
     } else if (decl.specifiers.length === 0) {
       parts.push("{}");
-    } else if (/^Export(Default|Namespace)Specifier$/.test(decl.specifiers[0].type)) {
+    } else if (
+      decl.specifiers[0].type === "ExportDefaultSpecifier" ||
+      decl.specifiers[0].type === "ExportNamespaceSpecifier"
+    ) {
       const unbracedSpecifiers: any[] = [];
       const bracedSpecifiers: any[] = [];
 
       path.each(function (specifierPath: any) {
         const spec = specifierPath.getValue();
-        if (/^Export(Namespace|Default)Specifier$/.test(spec.type)) {
+        if (
+          spec.type === "ExportDefaultSpecifier" ||
+          spec.type === "ExportNamespaceSpecifier"
+        ) {
           unbracedSpecifiers.push(print(specifierPath));
         } else {
           bracedSpecifiers.push(print(specifierPath));
