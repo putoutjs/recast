@@ -712,8 +712,8 @@ function genericPrintNoParens(path: any, options: any, print: any) {
       const separator = options.flowObjectCommas
         ? ","
         : isTypeAnnotation
-        ? ";"
-        : ",";
+          ? ";"
+          : ",";
       const fields = [];
       let allowBreak = false;
 

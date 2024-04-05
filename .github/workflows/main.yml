@@ -24,7 +24,7 @@ jobs:
 
       - name: yarn install
         run: npm i yarn -g
-      
+
       - name: npm install, build and test
         run: |
           yarn --no-lockfile
