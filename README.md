@@ -1,6 +1,6 @@
 # recast, _v_. ![CI](https://github.com/benjamn/recast/workflows/CI/badge.svg)
 
-# 📛 You better use [`@putout/printer`](https://github.com/putoutjs/printer) is much more powerful 📛
+# 📛 You better use [`@putout/printer`](https://github.com/putoutjs/printer) it is much more powerful 📛
 
 1. to give (a metal object) a different form by melting it down and reshaping it.
 1. to form, fashion, or arrange again.
