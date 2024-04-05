@@ -22,9 +22,12 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
+      - name: yarn install
+        run: npm i yarn -g
+      
       - name: npm install, build and test
         run: |
-          npm install -f
+          yarn --no-lockfile
           npm run build --if-present
           npm run format:check
           npm test
