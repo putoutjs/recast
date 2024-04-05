@@ -1197,19 +1197,19 @@ describe("printer", function () {
     const pretty = printer.printGenerically(ast).code;
     assert.strictEqual(pretty, code);
   });
-  
+
   it("adds parenthesis around arrow functions body when returning object expression using babel parser", function () {
     const expected = "() => ({\n  a: 'b'\n});";
     const source = "(a) => ({a: 'b'});";
     const ast = recast.parse(source, {
-        parser: require('@babel/parser'),
+      parser: require("@babel/parser"),
     });
-    const traverse = require('@babel/traverse').default;
-    
+    const traverse = require("@babel/traverse").default;
+
     traverse(ast, {
-        Function(path: any) {
-            path.get('params.0').remove();
-        }
+      Function(path: any) {
+        path.get("params.0").remove();
+      },
     });
 
     const printer = new Printer();
@@ -2430,27 +2430,19 @@ describe("printer", function () {
     const pretty = new Printer().printGenerically(ast).code;
     assert.strictEqual(pretty, code);
   });
-  
-  it("using AssignmentPattern in destructuring", function() {
-    const code = [
-        'var {',
-        '    a = "hi"',
-        '} = b;'
-    ].join(eol);
 
-    const init = b.identifier('b');
-    const assign =  b.assignmentPattern(b.identifier('a'), b.literal('hi'));
-    const property = b.property('init', b.identifier('a'), assign);
+  it("using AssignmentPattern in destructuring", function () {
+    const code = ["var {", '    a = "hi"', "} = b;"].join(eol);
+
+    const init = b.identifier("b");
+    const assign = b.assignmentPattern(b.identifier("a"), b.literal("hi"));
+    const property = b.property("init", b.identifier("a"), assign);
     property.shorthand = true;
-    
-    const id = b.objectPattern([
-      property
-    ]);
-    
+
+    const id = b.objectPattern([property]);
+
     const ast = b.program([
-      b.variableDeclaration('var', [
-        b.variableDeclarator(id, init)
-      ])
+      b.variableDeclaration("var", [b.variableDeclarator(id, init)]),
     ]);
 
     const pretty = new Printer().printGenerically(ast).code;
@@ -2646,4 +2638,3 @@ describe("printer", function () {
     );
   });
 });
-

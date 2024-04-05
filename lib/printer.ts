@@ -965,15 +965,15 @@ function genericPrintNoParens(path: any, options: any, print: any) {
 
     case "UnaryExpression": {
       parts.push(n.operator);
-      const {argument} = path.getValue();
-      const needsParens = argument.type === 'LogicalExpression';
-      const parenLeft = needsParens ? '(' : '';
-      const parenRight = needsParens ? ')' : '';
+      const { argument } = path.getValue();
+      const needsParens = argument.type === "LogicalExpression";
+      const parenLeft = needsParens ? "(" : "";
+      const parenRight = needsParens ? ")" : "";
       if (/[a-z]$/.test(n.operator)) parts.push(" ");
       parts.push(parenLeft, path.call(print, "argument"), parenRight);
       return concat(parts);
-
-    } case "UpdateExpression":
+    }
+    case "UpdateExpression":
       parts.push(path.call(print, "argument"), n.operator);
 
       if (n.prefix) parts.reverse();
@@ -1323,7 +1323,7 @@ function genericPrintNoParens(path: any, options: any, print: any) {
               return "\n";
             }
           }
-          
+
           return print(childPath);
         }, "children"),
       ).indentTail(options.tabWidth);
@@ -3057,12 +3057,12 @@ function printExportDeclaration(path: any, options: any, print: any) {
         }
       }
     } else {
-    parts.push(
-      shouldPrintSpaces ? "{ " : "{",
-      fromString(", ").join(path.map(print, "specifiers")),
-      shouldPrintSpaces ? " }" : "}",
-    );
-  }
+      parts.push(
+        shouldPrintSpaces ? "{ " : "{",
+        fromString(", ").join(path.map(print, "specifiers")),
+        shouldPrintSpaces ? " }" : "}",
+      );
+    }
 
     if (decl.source) {
       parts.push(

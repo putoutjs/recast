@@ -4,8 +4,8 @@ import * as recast from "../main";
 const n = recast.types.namedTypes;
 const b = recast.types.builders;
 
-import traverse, {NodePath, Node} from '@babel/traverse';
-import template from '@babel/template';
+import traverse, { NodePath, Node } from "@babel/traverse";
+import template from "@babel/template";
 
 const nodeMajorVersion = parseInt(process.versions.node, 10);
 
@@ -213,22 +213,22 @@ describe("Babel", function () {
   });
 
   it("ImportAttribute", function () {
-    const code = [
-      `import foo from "foo";`,
-    ].join(eol);
+    const code = [`import foo from "foo";`].join(eol);
 
     const ast = recast.parse(code, parseOptions);
-    ast.program.body[0].assertions = [{
-        type: 'ImportAttribute',
+    ast.program.body[0].assertions = [
+      {
+        type: "ImportAttribute",
         key: {
-            type: 'Identifier',
-            name: 'type',
+          type: "Identifier",
+          name: "type",
         },
         value: {
-            type: 'StringLiteral',
-            value: 'json',
-        }
-    }];
+          type: "StringLiteral",
+          value: "json",
+        },
+      },
+    ];
 
     const expected = `import foo from "foo" assert { type: "json" };`;
 
@@ -236,32 +236,33 @@ describe("Babel", function () {
   });
 
   it("ImportAttribute: a couple", function () {
-    const code = [
-      `import foo from "foo";`,
-    ].join(eol);
+    const code = [`import foo from "foo";`].join(eol);
 
     const ast = recast.parse(code, parseOptions);
-    ast.program.body[0].assertions = [{
-        type: 'ImportAttribute',
+    ast.program.body[0].assertions = [
+      {
+        type: "ImportAttribute",
         key: {
-            type: 'Identifier',
-            name: 'type',
+          type: "Identifier",
+          name: "type",
         },
         value: {
-            type: 'StringLiteral',
-            value: 'json',
-        }
-    }, {
-        type: 'ImportAttribute',
+          type: "StringLiteral",
+          value: "json",
+        },
+      },
+      {
+        type: "ImportAttribute",
         key: {
-            type: 'Identifier',
-            name: 'foo',
+          type: "Identifier",
+          name: "foo",
         },
         value: {
-            type: 'StringLiteral',
-            value: 'bar',
-        }
-    }];
+          type: "StringLiteral",
+          value: "bar",
+        },
+      },
+    ];
 
     const expected = `import foo from "foo" assert { type: "json", foo: "bar" };`;
 
@@ -269,9 +270,7 @@ describe("Babel", function () {
   });
 
   it("ImportAttribute: parse", function () {
-    const code = [
-      `import foo from "foo" assert { type: "json" };`,
-    ].join(eol);
+    const code = [`import foo from "foo" assert { type: "json" };`].join(eol);
 
     const ast = recast.parse(code, parseOptions);
 
@@ -529,24 +528,29 @@ describe("Babel", function () {
     const code = "(options || !options.bidirectional) ? false : true;";
     const ast = recast.parse(code, parseOptions);
 
-    ast.program.body[0].expression = b.unaryExpression('!', ast.program.body[0].expression.test);
+    ast.program.body[0].expression = b.unaryExpression(
+      "!",
+      ast.program.body[0].expression.test,
+    );
 
     assert.strictEqual(
       recast.print(ast).code,
-      '!((options || !options.bidirectional));',
+      "!((options || !options.bidirectional));",
     );
   });
   it("should use single quotes", function () {
     const code = "const a = 1;";
     const ast = recast.parse(code, parseOptions);
 
-    ast.program.body.unshift(b.expressionStatement(b.stringLiteral('use strict')));
+    ast.program.body.unshift(
+      b.expressionStatement(b.stringLiteral("use strict")),
+    );
 
     assert.strictEqual(
       recast.print(ast, { quote: "single" }).code,
       `'use strict';\nconst a = 1;`,
-      );
-   });
+    );
+  });
 
   it("should not add curly braces in ExportNamedDeclaration used with ExportNamespaceSpecifier", function () {
     const code = 'export * as fs2 from "fs/promises"';
@@ -556,13 +560,10 @@ describe("Babel", function () {
       ExportNamedDeclaration(path: NodePath) {
         path.replaceWith(template.ast('export * as fs from "xx"') as Node);
         path.stop();
-      }
-    })
+      },
+    });
 
-    assert.strictEqual(
-      recast.print(ast).code,
-      'export * as fs from "xx";'
-    );
+    assert.strictEqual(recast.print(ast).code, 'export * as fs from "xx";');
   });
 
   it("can handle ClassAccessorProperty elements", function () {

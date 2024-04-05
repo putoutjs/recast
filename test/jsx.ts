@@ -56,42 +56,44 @@ for (const { title, parser } of [
     });
 
     // Esprima does not parse JSX fragments: https://github.com/jquery/esprima/issues/2020
-    (/esprima/i.test(title)
-      ? xit
-      : it)("should parse and print fragments", function () {
-      check(["<>", "  <td>Hello</td>", "  <td>world!</td>", "</>"].join("\n"));
-    });
+    (/esprima/i.test(title) ? xit : it)(
+      "should parse and print fragments",
+      function () {
+        check(
+          ["<>", "  <td>Hello</td>", "  <td>world!</td>", "</>"].join("\n"),
+        );
+      },
+    );
   });
 }
 
 it("should not remove trailing whitespaces", function () {
-    const printer = new Printer({ tabWidth: 2 });
-    const source = 
-        'function App() {\n' +
-        '  const name = "world";\n' +
-        '\n' +
-        '  return (\n' +
-        '    <div className="app">\n' +
-        '        hello {name}\n' +
-        '    </div>\n' +
-        '  );\n' +
-        '}'
-    ;
-    
-    const ast = parse(source);
-    ast.program.body[0].body.body[1].argument.openingElement.attributes[0].name.name = 'abc';
-    
-    const code = printer.printGenerically(ast).code;
-    
-    assert.equal(
-      code,
-        'function App() {\n' +
-        '  const name = "world";\n' +
-        '\n' +
-        '  return (\n' + 
-        '    <div abc="app">hello {name}\n' +
-        '    </div>\n' +
-        '  );\n' +
-        '}'
-    );
+  const printer = new Printer({ tabWidth: 2 });
+  const source =
+    "function App() {\n" +
+    '  const name = "world";\n' +
+    "\n" +
+    "  return (\n" +
+    '    <div className="app">\n' +
+    "        hello {name}\n" +
+    "    </div>\n" +
+    "  );\n" +
+    "}";
+  const ast = parse(source);
+  ast.program.body[0].body.body[1].argument.openingElement.attributes[0].name.name =
+    "abc";
+
+  const code = printer.printGenerically(ast).code;
+
+  assert.equal(
+    code,
+    "function App() {\n" +
+      '  const name = "world";\n' +
+      "\n" +
+      "  return (\n" +
+      '    <div abc="app">hello {name}\n' +
+      "    </div>\n" +
+      "  );\n" +
+      "}",
+  );
 });
