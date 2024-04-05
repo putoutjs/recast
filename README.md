@@ -1,4 +1,4 @@
-# recast, _v_. ![CI](https://github.com/benjamn/recast/workflows/CI/badge.svg)
+# recast, _v_. ![CI](https://github.com/putoutjs/recast/workflows/CI/badge.svg)
 
 # 📛 You better use [`@putout/printer`](https://github.com/putoutjs/printer) it is much more powerful 📛
 
