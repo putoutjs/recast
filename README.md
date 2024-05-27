@@ -9,7 +9,8 @@
 
 # Fork contains unmerged fixes
 
-- ✅ Fixed removing whiltespaces from `JSXText` (https://github.com/benjamn/recast/pull/1223)
+- ✅ Fixed removing whiltespaces from `JSXText` (https://github.com/benjamn/recast/pull/1223);
+- ✅ Support of getters/setters in interfaces (https://github.com/benjamn/recast/pull/1383);
 
 ## Installation
 
