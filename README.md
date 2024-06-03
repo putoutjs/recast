@@ -7,10 +7,6 @@
 1. to remodel or reconstruct (a literary work, document, sentence, etc.).
 1. to supply (a theater or opera work) with a new cast.
 
-# Fork contains unmerged fixes
-
-- ✅ Fixed removing whiltespaces from `JSXText` (https://github.com/benjamn/recast/pull/1223);
-
 ## Installation
 
 ```
